@@ -60,7 +60,7 @@ impl PingCommand {
 #[cfg(test)]
 fn parse<'a>(input: &'a str) -> Result<Option<PingCommand>, Error<'a>> {
     let mut toks = Tokenizer::new(input);
-    Ok(PingCommand::parse(&mut toks)?)
+    PingCommand::parse(&mut toks)
 }
 
 #[test]

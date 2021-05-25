@@ -69,7 +69,7 @@ mod test {
 
     fn parse<'a>(input: &'a str) -> Result<Option<GlacierCommand>, Error<'a>> {
         let mut toks = Tokenizer::new(input);
-        Ok(GlacierCommand::parse(&mut toks)?)
+        GlacierCommand::parse(&mut toks)
     }
 
     #[test]

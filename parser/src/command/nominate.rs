@@ -80,7 +80,7 @@ impl NominateCommand {
 #[cfg(test)]
 fn parse<'a>(input: &'a str) -> Result<Option<NominateCommand>, Error<'a>> {
     let mut toks = Tokenizer::new(input);
-    Ok(NominateCommand::parse(&mut toks)?)
+    NominateCommand::parse(&mut toks)
 }
 
 #[test]

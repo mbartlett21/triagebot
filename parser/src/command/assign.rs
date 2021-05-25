@@ -81,7 +81,7 @@ impl AssignCommand {
 #[cfg(test)]
 fn parse<'a>(input: &'a str) -> Result<Option<AssignCommand>, Error<'a>> {
     let mut toks = Tokenizer::new(input);
-    Ok(AssignCommand::parse(&mut toks)?)
+    AssignCommand::parse(&mut toks)
 }
 
 #[test]
