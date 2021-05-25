@@ -45,16 +45,16 @@ impl GlacierCommand {
                 Some(Token::Quote(s)) => {
                     let source = s.to_owned();
                     if source.starts_with("https://gist.github.com/") {
-                        return Ok(Some(GlacierCommand { source }));
+                        Ok(Some(GlacierCommand { source }))
                     } else {
-                        return Err(toks.error(ParseError::InvalidLink));
+                        Err(toks.error(ParseError::InvalidLink))
                     }
                 }
                 Some(Token::Word(_)) => {
-                    return Err(toks.error(ParseError::InvalidLink));
+                    Err(toks.error(ParseError::InvalidLink))
                 }
                 _ => {
-                    return Err(toks.error(ParseError::NoLink));
+                    Err(toks.error(ParseError::NoLink))
                 }
             }
         } else {

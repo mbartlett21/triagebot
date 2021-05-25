@@ -806,9 +806,9 @@ impl Repository {
                 include_labels.join(",")
             )))
             .chain(std::iter::once("filter=all".to_owned()))
-            .chain(std::iter::once(format!("sort=created")))
-            .chain(std::iter::once(format!("direction=asc")))
-            .chain(std::iter::once(format!("per_page=100")))
+            .chain(std::iter::once("sort=created".to_string()))
+            .chain(std::iter::once("direction=asc".to_string()))
+            .chain(std::iter::once("per_page=100".to_string()))
             .collect::<Vec<_>>()
             .join("&");
         format!(
@@ -828,9 +828,9 @@ impl Repository {
                 include_labels.join(",")
             )))
             .chain(std::iter::once("filter=all".to_owned()))
-            .chain(std::iter::once(format!("sort=created")))
-            .chain(std::iter::once(format!("direction=asc")))
-            .chain(std::iter::once(format!("per_page=100")))
+            .chain(std::iter::once("sort=created".to_string()))
+            .chain(std::iter::once("direction=asc".to_string()))
+            .chain(std::iter::once("per_page=100".to_string()))
             .collect::<Vec<_>>()
             .join("&");
         format!(

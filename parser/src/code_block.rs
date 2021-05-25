@@ -13,7 +13,7 @@ impl ColorCodeBlocks {
         while let Some((event, range)) = parser.next() {
             if let Event::Start(Tag::CodeBlock(_)) = event {
                 let start = range.start;
-                while let Some((event, range)) = parser.next() {
+                for (event, range) in &mut parser {
                     if let Event::End(Tag::CodeBlock(_)) = event {
                         code.push(start..range.end);
                         break;

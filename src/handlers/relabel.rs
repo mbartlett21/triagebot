@@ -123,11 +123,11 @@ fn check_filter(
         }
     }
     if matched {
-        return Ok(CheckFilterResult::Allow);
+        Ok(CheckFilterResult::Allow)
     } else if is_member == TeamMembership::Outsider {
-        return Ok(CheckFilterResult::Deny);
+        Ok(CheckFilterResult::Deny)
     } else {
-        return Ok(CheckFilterResult::DenyUnknown);
+        Ok(CheckFilterResult::DenyUnknown)
     }
 }
 
@@ -139,8 +139,8 @@ enum MatchPatternResult {
 }
 
 fn match_pattern(pattern: &str, label: &str) -> anyhow::Result<MatchPatternResult> {
-    let (pattern, inverse) = if pattern.starts_with('!') {
-        (&pattern[1..], true)
+    let (pattern, inverse) = if let Some(p) = pattern.strip_prefix('!') {
+        (p, true)
     } else {
         (pattern, false)
     };

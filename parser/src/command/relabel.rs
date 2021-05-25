@@ -141,7 +141,6 @@ impl RelabelCommand {
                     // afterwards.
                 }
                 // continue
-                {} // FIXME(rustfmt#4506): this is needed to get rustfmt to indent the comment correctly
             } else {
                 return Ok(None);
             }
@@ -149,7 +148,6 @@ impl RelabelCommand {
             // optionally eat a colon
             toks.eat_token(Token::Colon)?;
             // continue
-            {} // FIXME(rustfmt#4506): this is needed to get rustfmt to indent the comment correctly
         } else {
             return Ok(None);
         }

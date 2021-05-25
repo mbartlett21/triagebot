@@ -154,7 +154,7 @@ async fn serve_req(req: Request<Body>, ctx: Arc<Context>) -> Result<Response<Bod
         payload.extend_from_slice(&chunk);
     }
 
-    if let Err(_) = payload::assert_signed(signature, &payload) {
+    if payload::assert_signed(signature, &payload).is_err() {
         return Ok(Response::builder()
             .status(StatusCode::FORBIDDEN)
             .body(Body::from("Wrong signature"))

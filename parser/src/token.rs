@@ -176,13 +176,16 @@ impl<'a> Tokenizer<'a> {
     pub fn next_token(&mut self) -> Result<Option<Token<'a>>, Error<'a>> {
         self.consume_whitespace();
         if self.at_end() {
-            if self.end_of_input_emitted {
-                return Ok(None);
+            let ret = if self.end_of_input_emitted {
+                None
             } else {
                 self.end_of_input_emitted = true;
-                return Ok(Some(Token::EndOfLine));
-            }
+                Some(Token::EndOfLine)
+            };
+
+            return Ok(ret);
         }
+
         if let Some(punct) = self.consume_punct() {
             return Ok(Some(punct));
         }
@@ -199,11 +202,12 @@ impl<'a> Tokenizer<'a> {
         }) {
             if self.cur().unwrap().1 == '"' {
                 let so_far = self.str_from(start);
-                if so_far.starts_with('r') && so_far.chars().skip(1).all(|v| v == '#' || v == '"') {
-                    return Err(self.error(ErrorKind::RawString));
+                let error_kind = if so_far.starts_with('r') && so_far.chars().skip(1).all(|v| v == '#' || v == '"') {
+                    ErrorKind::RawString
                 } else {
-                    return Err(self.error(ErrorKind::QuoteInWord));
-                }
+                    ErrorKind::QuoteInWord
+                };
+                return Err(self.error(error_kind));
             }
             self.advance();
         }

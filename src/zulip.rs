@@ -284,7 +284,7 @@ async fn execute_for_other_user(
         Some(m) => m,
         None => {
             return Ok(serde_json::to_string(&Response {
-                content: &format!("Could not find Zulip user email."),
+                content: "Could not find Zulip user email.",
             })
             .unwrap());
         }
