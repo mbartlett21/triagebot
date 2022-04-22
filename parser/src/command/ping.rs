@@ -37,8 +37,7 @@ impl fmt::Display for ParseError {
 impl PingCommand {
     pub fn parse<'a>(input: &mut Tokenizer<'a>) -> Result<Option<Self>, Error<'a>> {
         let mut toks = input.clone();
-        if let Some(Token::Word("ping")) = toks.peek_token()? {
-            toks.next_token()?;
+        if toks.eat_token(Token::Word("ping"))? {
             let team = if let Some(Token::Word(team)) = toks.next_token()? {
                 team.to_owned()
             } else {
