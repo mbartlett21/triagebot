@@ -24,8 +24,7 @@ impl fmt::Display for ParseError {
 impl NoteCommand {
     pub fn parse<'a>(input: &mut Tokenizer<'a>) -> Result<Option<Self>, Error<'a>> {
         let mut toks = input.clone();
-        if let Some(Token::Word("note")) = toks.peek_token()? {
-            toks.next_token()?;
+        if toks.eat_token(Token::Word("note"))? {
             let mut remove = false;
             loop {
                 match toks.next_token()? {
